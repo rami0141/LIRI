@@ -9,7 +9,7 @@ var request = require("request");
 var Spotify = require("node-spotify-api");
 
 var action = process.argv[2];
-//var nodeArgs = process.argv[3];
+var nodeArgs = process.argv[3];
 var input = "";
 
 // LOOPS THROUGH ALL THE WORDS IN THE NODE ARGUMENT 
@@ -97,18 +97,17 @@ function showMovie() {
 	var nodeArgs = process.argv;
 	var movieName = process.argv[3];
 
-// 	for (var i = 3; i < nodeArgs.length; i++) {
+ //  	for (var i = 3; i < nodeArgs.length; i++) {
 
-//  	 if (i > 3 && i < nodeArgs.length) {
-// 	movieName = movieName + "+" + nodeArgs[i];
-// } else {
-//     movieName += nodeArgs[i];
-//   }
-// }
+ //   	 //if (i > 3 && i < nodeArgs.length) {
+ //  	movieName = movieName + "+" + nodeArgs[i];
+ // } else {
+ //      movieName += nodeArgs[i];
+ //    }
+ // }
 	// Running a request using omdb api
 	var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
 
-	console.log(queryUrl);
 	request(queryUrl, function(error, response, body) {
 
   // If the request is successful
@@ -127,15 +126,6 @@ function showMovie() {
 });
 // This ends the showMovie function	
 }
-
- // * Title of the movie.
- //   * Year the movie came out.
- //   * IMDB Rating of the movie.
- //   * Rotten Tomatoes Rating of the movie.
- //   * Country where the movie was produced.
- //   * Language of the movie.
- //   * Plot of the movie.
- //   * Actors in the movie.
 
 //---------------------------------------------------------------------------------------------------
 // // fs
