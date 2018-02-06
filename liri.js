@@ -3,26 +3,27 @@ require("dotenv").config();
 
 // fs is a core Node package for reading and writing files
 var fs = require("fs");
+var Twitter = require("twitter");
 var keys = require('./keys.js')
-var twitter = require("twitter");
 var request = require("request");
-var spotify = require("node-spotify-api");
+var Spotify = require("node-spotify-api");
 
-// Take two arguments.
 var action = process.argv[2];
-var nodeArgs = process.argv
+var nodeArgs = process.argv[3];
 var input = "";
+
+console.log(nodeArgs);
+console.log(action);
 
 // LOOPS THROUGH ALL THE WORDS IN THE NODE ARGUMENT 
 // DO A LOOP TO GET EVERYTHING AFTER THE INDEX OF 2 NODE ARGUMENT
-for (var i = 3; i < nodeArgs.length; i++) {
-    if (i > 3 && i < nodeArgs.length) {
-        input = input + "+" + nodeArgs[i];
-    } else {
-        input = input+ nodeArgs[i];
-    }
-}
-
+// for (var i = 3; i < nodeArgs.length; i++) {
+//     if (i > 3 && i < nodeArgs.length) {
+//         input = input + "+" + nodeArgs[i];
+//     } else {
+//         input = input + nodeArgs[i];
+//     }
+// }
 
 // This will tell which function will run
 switch (action) {
@@ -48,21 +49,37 @@ switch (action) {
 }
 
 // twitter action  -- figure out later
-function showTweets() {
 
-}
+function showTweets() {
+	//validatiom
+	var T = new Twitter(keys.twitter);
+
+  	var params = {screen_name: 'crami0141', count: 10};
+
+  	T.get('statuses/user_timeline', params, function(error, tweets, response) {
+
+    if (!error) {
+      for (var i = 0; i < tweets.length; i++) {
+            console.log(tweets[i].created_at);
+            console.log(tweets[i].text);
+      } 
+  	};
+  });
+ }
+
 
 // Spotify action
+// validatiom
+//	var S = new Spotify(keys.switter);
+//function showSpotify() {
+// }
 
-function showSpotify() {
-}
+// // Movie action
+// function showMovie() {
 
-// Movie action
-function showMovie() {
+// }
 
-}
+// // fs
+// function showFs() {
 
-// fs
-function showFs() {
-
-}
+// }
