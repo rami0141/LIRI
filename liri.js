@@ -9,10 +9,10 @@ var request = require("request");
 var Spotify = require("node-spotify-api");
 
 var action = process.argv[2];
-var nodeArgs = process.argv[3];
+//var nodeArgs = process.argv[3];
 var input = "";
 
-// LOOPS THROUGH ALL THE WORDS IN THE NODE ARGUMENT 
+// LOOPING THROUGH ALL THE WORDS IN THE NODE ARGUMENT 
 // DO A LOOP TO GET EVERYTHING AFTER THE INDEX OF 2 NODE ARGUMENT
 //for (var i = 3; i < nodeArgs.length; i++) {
 //	input = input + " " + nodeArgs[i];
@@ -70,25 +70,31 @@ function showTweets() {
 //------------------------------------------------------------------------------------------------
 
 // Spotify action
-// function showSpotify() {
-// 	// Linking API key for Spotify
-// 	var spotify = new Spotify(keys.spotify);
+function showSpotify() {
+	// Linking API key for Spotify
+	var spotify = new Spotify(keys.spotify);
 
-// 	var song = process.argv[3];
 
-// 	spotify.search({ type: 'track', query: 'query.song_title' }, function(err, data) {
-//   	if (err) {
-//     return console.log('Error occurred: ' + err);
-//   }
-//
-//logThis('Artist Name: ' + data.tracks.items[0].artists[0].name);
-//		logThis('Song Name: ' + data.tracks.items[0].name);
-//		logThis('Preview Link: ' + data.tracks.items[0].preview_url);
-//		logThis('Album Title: ' + data.tracks.items[0].album.name);
-// console.log(data); 
-// });
-// This ends the showSpotify function	
-// }
+//create a loop that grabs multiple word titles and makes it into one string..
+	for(i=3;i<process.argv.length;i++){
+    var song = song + '+' + process.argv[i];
+  }
+  if(song == undefined){
+    console.log()
+    
+  }
+
+  spotify.search({type: 'track', query: song}, function(err,data){
+    if(!err){
+      //console log data
+      console.log('--------------------------------------------------------------');
+      console.log('Artist: ' + data.tracks.items[0].artists[0].name);
+      console.log('Album Name: ' + data.tracks.items[0].album.name);
+      console.log('Song Name: ' + data.tracks.items[0].name);
+      console.log('Preview Link: ' + data.tracks.items[0].preview_url);
+    }
+  })
+}
 
 //--------------------------------------------------------------------------------------------
 // Movie action
@@ -97,8 +103,9 @@ function showMovie() {
 	var nodeArgs = process.argv;
 	var movieName = process.argv[3];
 
+//create a loop that grabs multiple word titles and makes it into one string..
+// Right now this api only works with single word titles
  //  	for (var i = 3; i < nodeArgs.length; i++) {
-
  //   	 //if (i > 3 && i < nodeArgs.length) {
  //  	movieName = movieName + "+" + nodeArgs[i];
  // } else {
@@ -129,6 +136,14 @@ function showMovie() {
 
 //---------------------------------------------------------------------------------------------------
 // // fs
-// function showFs() {
 
-// }
+//
+function showFs() {
+  // reading what is inside random.tx
+  fs.readFile('random.txt', "utf8", function(error, data){
+    //create code that links puts in a request "I want it that way" in the showSpotify() function
+    //console loging the
+    console.log("I Want it That Way");
+
+  });
+}
