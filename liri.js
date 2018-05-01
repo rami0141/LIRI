@@ -12,6 +12,7 @@ var action = process.argv[2];
 //var nodeArgs = process.argv[3];
 var input = "";
 
+
 // LOOPING THROUGH ALL THE WORDS IN THE NODE ARGUMENT 
 // DO A LOOP TO GET EVERYTHING AFTER THE INDEX OF 2 NODE ARGUMENT
 //for (var i = 3; i < nodeArgs.length; i++) {
@@ -56,12 +57,15 @@ function showTweets() {
 
   	var params = {screen_name: 'crami0141', count: 20};
 
+    console.log("____________MY TWEETS____________");
+
   	client.get('statuses/user_timeline', params, function(error, tweets, response) {
 
     if (!error) {
       for (var i = 0; i < tweets.length; i++) {
-            console.log(tweets[i].created_at);
+            console.log("\n" + tweets[i].created_at);
             console.log(tweets[i].text);
+            console.log("___________________________");
       } 
   	};
   });
@@ -87,7 +91,7 @@ function showSpotify() {
   spotify.search({type: 'track', query: song}, function(err,data){
     if(!err){
       //console log data
-      console.log('--------------------------------------------------------------');
+      console.log('___________________SPOTIFY___________________');
       console.log('Artist: ' + data.tracks.items[0].artists[0].name);
       console.log('Album Name: ' + data.tracks.items[0].album.name);
       console.log('Song Name: ' + data.tracks.items[0].name);
@@ -121,6 +125,7 @@ function showMovie() {
   if (!error && response.statusCode === 200) {
 
     // console logging the following info 
+    console.log("_________________Movie___________________")
     console.log("Title: " + JSON.parse(body).Title);
     console.log("Release Year: " + JSON.parse(body).Year);
     console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
